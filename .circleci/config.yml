@@ -19,7 +19,7 @@ jobs:
       #             --paths /index.html /app.js
 workflows:
   version: 2
-  kcent:
+  turtlog.ml:
     jobs:
       - deploy:
           filters:
