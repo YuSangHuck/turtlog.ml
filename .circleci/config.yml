@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: novemberde/node-awscli:vuecli-0.1
+    working_directory: ~/repo
+    steps:
+      - checkout
+      # Deploy files!
+      - run: npm i
+      - run:
+          command: npm run build
+          environment:
+            NODE_ENV: production
+      - run: aws s3 cp ./dist s3://turtlog.ml/ --acl public-read --recursive
+      # - run:
+      #     command: aws cloudfront create-invalidation
+      #             --distribution-id EA8V5H12G53MS
+      #             --paths /index.html /app.js
+workflows:
+  version: 2
+  kcent:
+    jobs:
+      - deploy:
+          filters:
+              branches:
+                only: master
