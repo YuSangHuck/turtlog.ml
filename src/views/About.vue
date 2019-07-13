@@ -10,12 +10,11 @@ export default {
   // OpenGraph
   metaInfo: {
     meta: [
-      { charset: 'utf-8' },
       { property: 'og:title', content: 'about title', vmid: 'og:title' },
       { property: 'og:description', content: 'about description', vmid: 'og:description' },
       { property: 'og:image:type', content: 'image/jpg', vmid: 'og:image:type' },
       { property: 'og:image', content: '/og_about.jpg', vmid: 'og:image' },
-      { property: 'og:url', content: 'http://turtlog.ml', vmid: 'og:url' },
+      { property: 'og:url', content: 'http://turtlog.ml/about', vmid: 'og:url' },
       { property: 'og:type', content: 'website', vmid: 'og:type' },
     ],
   },
