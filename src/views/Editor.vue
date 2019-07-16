@@ -7,27 +7,8 @@
 </template>
 
 <script lang="ts">
-// import { Component, Vue } from 'vue-property-decorator';
-
-// @Component({
-//   components: {
-//   },
-// })
 export default {
   name: 'Editor',
-  // OpenGraph
-  metaInfo: {
-    meta: [
-      { property: 'og:title', content: 'editor title', vmid: 'og:title' },
-      { property: 'og:description', content: 'editor description', vmid: 'og:description' },
-      { property: 'og:image:type', content: 'image/jpg', vmid: 'og:image:type' },
-      { property: 'og:image', content: '/og_editor.jpg', vmid: 'og:image' },
-      { property: 'og:url', content: 'http://turtlog.ml', vmid: 'og:url' },
-      { property: 'og:type', content: 'website', vmid: 'og:type' },
-    ],
-  },
-  // created() {
-  // beforeMount() {
   mounted() {
     const editorConfig1 = {
       language: 'es',
