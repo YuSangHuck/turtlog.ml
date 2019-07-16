@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      a: ogtagInfos,
+      a: process.env.VUE_APP_SOMEKEY,
     };
   },
 };
