@@ -1,42 +1,25 @@
 <template>
   <div class="editor">
-    editor
-    <textarea name="editor1"></textarea>
-    <button>작성</button>
+		<div id="editor">
+		</div>
   </div>
 </template>
 
 <script lang="ts">
+// import ClassicEditor from '@/lib/ckeditor/ckeditor5-build-classic/ckeditor'
 export default {
   name: 'Editor',
   mounted() {
-    const editorConfig1 = {
-      language: 'es',
-      uiColor: '#9AB8F3',
-      height: 300,
-      toolbarCanCollapse: true,
-    };
-    const editorConfig2 = {
-      toolbarGroups: [
-        { name: 'clipboard', groups: ['clipboard', 'undo'] },
-        { name: 'document', groups: ['mode', 'document', 'doctools'] },
-        { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
-        { name: 'forms', groups: ['forms'] },
-        '/',
-        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
-        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
-        { name: 'links', groups: ['links'] },
-        { name: 'insert', groups: ['insert'] },
-        '/',
-        { name: 'styles', groups: ['styles'] },
-        { name: 'colors', groups: ['colors'] },
-        { name: 'tools', groups: ['tools'] },
-        { name: 'others', groups: ['others'] },
-        { name: 'about', groups: ['about'] },
-      ],
-    };
-    // CKEDITOR.replace( 'editor1', editorConfig1);
-    CKEDITOR.replace('editor1', editorConfig2);
+    ClassicEditor
+      .create( document.querySelector( '#editor' ), {
+        // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+      } )
+      .then( editor => {
+        window.editor = editor;
+      } )
+      .catch( err => {
+        console.error( err.stack );
+      } );
   },
 };
 </script>
