@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    {{ a }}
   </div>
 </template>
 
@@ -22,6 +23,11 @@ export default {
       { property: 'og:url', content: 'http://turtlog.ml', vmid: 'og:url' },
       { property: 'og:type', content: 'website', vmid: 'og:type' },
     ],
+  },
+  data() {
+    return {
+      a: ogtagInfos,
+    };
   },
 };
 </script>
