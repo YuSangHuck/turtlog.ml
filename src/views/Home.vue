@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     {{ a }}
+    <button @click="test" >click</button>
   </div>
 </template>
 
@@ -28,6 +29,11 @@ export default {
     return {
       a: process.env.VUE_APP_SOMEKEY,
     };
+  },
+  methods: {
+    test() {
+      console.log('test called');
+    },
   },
 };
 </script>
