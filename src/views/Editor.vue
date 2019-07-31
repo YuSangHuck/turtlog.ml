@@ -2,11 +2,14 @@
   <div class="aaaa">
     <div id="editor">
     </div>
-    <button @click="uploadAdapter.sendRequest" >click</button>
+    <button id='btn'>click</button>
+    <!-- <button v-on:click="uploadAdapter.sendRequest" >click</button> -->
+    <!-- <div v-on:click="uploadAdapter.sendRequest">click</div> -->
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 class MyUploadAdapter {
   constructor(loader) {
     this.loader = loader;
@@ -24,6 +27,7 @@ class MyUploadAdapter {
   // Initializes XMLHttpRequest listeners.
   _initListeners(resolve, reject, file) {
     console.log('_initListeners called');
+    console.log(file)
     const { xhr } = this;
     const { loader } = this;
     const genericErrorText = `Couldn't upload file: ${file.name}.`;
@@ -110,7 +114,10 @@ export default {
       uploadAdapterPlugin: {},
     };
   },
+  // created() {
+  // },
   mounted() {
+    document.getElementById('btn').addEventListener('click', this.test);
     ClassicEditor
       .create(document.querySelector('#editor'), {
         extraPlugins: [this.MyCustomUploadAdapterPlugin],
@@ -132,6 +139,9 @@ export default {
       });
   },
   methods: {
+    test() {
+      console.log('test calleed')
+    },
     MyCustomUploadAdapterPlugin(editor) {
       console.log('MyCustomUploadAdapterPlugin called');
       editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
