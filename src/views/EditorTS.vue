@@ -14,27 +14,28 @@
     </div>
   </div>
 </template>
-<script>
+<script lang='ts'>
 import Vue from 'vue';
+import { Promise, resolve, reject } from 'q';
 // NOTE UploadAdapter interface를 구현한 것
 // reference: https://ckeditor.com/docs/ckeditor5/latest/api/module_upload_filerepository-UploadAdapter.html
 class MyUploadAdapter {
-  constructor(loader) {
+  private loader: fileLoader;
+  private xhr: XMLHttpRequest = new XMLHttpRequest();
+  constructor(loader: fileLoader) {
     // NOTE file loader(read image from disk to variable)
     this.loader = loader;
   }
 
   // Initializes the XMLHttpRequest object using the URL passed to the constructor.
-  _initRequest(method, uploadUrl) {
+  _initRequest(method: string, uploadUrl: string) {
     console.log('_initRequest called');
-    this.xhr = new XMLHttpRequest();
-    const xhr = this.xhr;
-    xhr.open(method, uploadUrl, true);
-    xhr.responseType = 'json';
+    this.xhr.open(method, uploadUrl, true);
+    this.xhr.responseType = 'json';
   }
 
   // Initializes XMLHttpRequest listeners.
-  _initListeners(resolve, reject, file) {
+  _initListeners(resolve: resolve, reject: reject, file) {
     console.log('_initListeners called');
     console.log(file);
     const { xhr } = this;
@@ -46,7 +47,10 @@ class MyUploadAdapter {
     xhr.addEventListener('abort', () => reject());
     xhr.addEventListener('load', () => {
       console.log('xhr load called');
-      const { response } = xhr;
+      // const { response } = xhr;
+      const response = {
+        url: 'https://precium.io/img/MarkJang.cd19bf1d.png',
+      };
       console.log(`_initListeners.onLoad response.url: ${response.url}`);
       // This example assumes the XHR server's "response" object will come with
       // an "error" which has its own "message" that can be passed to reject()
@@ -62,7 +66,7 @@ class MyUploadAdapter {
       // at least the "default" URL, pointing to the image on the server.
       // This URL will be used to display the image in the content. Learn more in the
       // UploadAdapter#upload documentation.
-      return resolve({
+      resolve({
         default: response.url,
         // srcset
         // default: 'http://example.com/images/image–default-size.png',
@@ -87,7 +91,7 @@ class MyUploadAdapter {
   }
 
   // create에서 post로 만들엇으므로 axios.post 같은거
-  _sendRequest(file) {
+  _sendRequest(file: File) {
     console.log(`_sendRequest called with ${file}`);
     // Prepare the form data.
     const data = new FormData();
@@ -177,9 +181,9 @@ export default {
       console.log('test calleed');
       this.content = editor.getData();
     },
-    MyCustomUploadAdapterPlugin(editor) {
+    MyCustomUploadAdapterPlugin(editor: editor) {
       console.log('MyCustomUploadAdapterPlugin called');
-      editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      editor.plugins.get('FileRepository').createUploadAdapter = (loader: fileLoader) => {
         // Configure the URL to the upload script in your back-end here!
         this.uploadAdapter = new MyUploadAdapter(loader);
         console.log(`여기야! :${this.uploadAdapter}`);

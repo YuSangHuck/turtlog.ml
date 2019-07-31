@@ -26,5 +26,10 @@ export default new Router({
       name: 'editor',
       component: () => import('./views/Editor.vue'),
     },
+    {
+      path: '/editor-ts',
+      name: 'editor-ts',
+      component: () => import('./views/EditorTS.vue'),
+    },
   ],
 });
