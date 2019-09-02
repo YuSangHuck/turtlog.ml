@@ -1,6 +1,9 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <p>test</p>
+    <img src="@/assets/logo.png" alt="" srcset="">
+    <img src="@/assets/earth_rotate.gif" alt="" srcset="">
   </div>
 </template>
 
