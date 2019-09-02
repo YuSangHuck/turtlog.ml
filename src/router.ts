@@ -27,11 +27,6 @@ export default new Router({
       component: () => import('./views/Editor.vue'),
     },
     {
-      path: '/editor-ts',
-      name: 'editor-ts',
-      component: () => import('./views/EditorTS.vue'),
-    },
-    {
       path: '*',
       name: '404',
       component: () => import('./views/404.vue'),
