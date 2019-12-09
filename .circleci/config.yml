@@ -21,7 +21,40 @@ workflows:
   version: 2
   turtlog.ml:
     jobs:
-      - deploy:
+      - build
+      - alpha:
           filters:
               branches:
-                only: master
+                only: dev
+      - alpha1.9:
+          filters:
+              branches:
+                only: dev1.9
+      - hold:
+          type: approval
+          require: alpha
+          filters:
+              branches:
+                only: dev
+      - hold1.9:
+          type: approval
+          require: alpha1.9
+          filters:
+              branches:
+                only: dev1.9
+      - prod:
+          requires:
+            - alpha
+          filters:
+              branches:
+                only:
+                  - dev
+                  - alpha
+      - prod1.9:
+          requires:
+            - alpha1.9
+          filters:
+              branches:
+                only:
+                - dev1.9
+                - alpha1.9
